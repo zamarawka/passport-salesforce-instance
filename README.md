@@ -8,6 +8,12 @@ Main goal of this package is login to concrete salesforce instance. It could be 
 
 Package includes its TypeScript Definitions
 
+# Install
+
+```sh
+npm install passport-salesforce-instance
+```
+
 # Usage
 
 ```ts
