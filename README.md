@@ -97,12 +97,25 @@ app.get('/users/join/sf', withSfAuth, (req, res, next) => {
 });
 ```
 
+## Strategy params
+
+| Name             | Required | Default                             | Description                                                                                                                                  |
+| ---------------- | -------- | ----------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| host             | true     | `undefined`                         | String of Function typed as `(req: Express.Reqest, options: AuthorizeOptions) => string`, which contains host of Salesforce instance         |
+| clientID         | true     | `undefined`                         | String with clientID of Salesforce app                                                                                                       |
+| clientSecret     | true     | `undefined`                         | String with clientSecret of Salesforce app                                                                                                   |
+| callbackURL      | true     | `undefined`                         | String with callback url of your app to handle Salesforce response. For usage example it will be `<app host>/users/join/sf`                  |
+| authorizationURL | false    | `${host}/services/oauth2/authorize` | Url of Salesforce OAuth2 authorize page                                                                                                      |
+| tokenURL         | false    | `${host}/services/oauth2/token`     | Url of Salesforce OAuth2 token [api endpoint](https://help.salesforce.com/s/articleView?id=sf.remoteaccess_oauth_web_server_flow.htm&type=5) |
+| isForceLogin     | false    | `false`                             | View login form into authorize action. It will prevent automatic authorize of logged in users                                                |
+
 # Development
 
 ```sh
 npm run format # code fomatting
 npm run lint # linting
 npm run build # build
+npm run test # testing
 ```
 
 Active maintenance with care and ❤️.

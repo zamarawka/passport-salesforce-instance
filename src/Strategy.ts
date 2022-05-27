@@ -11,6 +11,7 @@ type Options = {
   clientID: string;
   clientSecret: string;
   callbackURL: string;
+  isForceLogin?: boolean;
 };
 
 type VerifyCb = (
@@ -33,7 +34,10 @@ export default class Strategy extends OAuth2Strategy {
 
   constructor(opts: Options & { passReqToCallback?: boolean }, verify: VerifyWithReqCb);
   constructor(opts: Options, verify: VerifyCb);
-  constructor({ host, ...opts }: Options, verify: VerifyCb | VerifyWithReqCb) {
+  constructor(
+    { host, isForceLogin = false, ...opts }: Options,
+    verify: VerifyCb | VerifyWithReqCb,
+  ) {
     if (!host) {
       throw new TypeError('SalesforceStrategy: host is required param');
     }
@@ -47,7 +51,9 @@ export default class Strategy extends OAuth2Strategy {
       };
 
     const options = {
-      authorizationURL: urlLookup('/services/oauth2/authorize'),
+      authorizationURL: urlLookup(
+        `/services/oauth2/authorize${isForceLogin ? '?prompt=login' : ''}`,
+      ),
       tokenURL: urlLookup('/services/oauth2/token'),
       ...opts,
     };

@@ -17,3 +17,9 @@ declare module 'passport-oauth2-alt' {
     authenticate(...args: any[]): any;
   }
 }
+
+declare module 'chai-passport-strategy' {
+  export = () => any;
+
+  export default any;
+}
